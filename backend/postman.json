@@ -1,0 +1,800 @@
+{
+  "info": {
+    "name": "AI Study Companion Pro API",
+    "description": "Complete API documentation for AI Study Companion Pro - An AI-powered learning assistant",
+    "version": "1.0.0",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health & Info",
+      "item": [
+        {
+          "name": "Root Endpoint",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": [""]
+            },
+            "description": "Get application information and version"
+          },
+          "response": []
+        },
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/health",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["health"]
+            },
+            "description": "Check if the application is healthy and running"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Create User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"user@example.com\",\n  \"username\": \"username123\",\n  \"full_name\": \"John Doe\",\n  \"password\": \"securepassword123\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/users/",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "users", ""]
+            },
+            "description": "Create a new user account. Email and username must be unique. Password is optional."
+          },
+          "response": []
+        },
+        {
+          "name": "Get User by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/users/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "users", "1"]
+            },
+            "description": "Get user details by user ID"
+          },
+          "response": []
+        },
+        {
+          "name": "Update User",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"newemail@example.com\",\n  \"username\": \"newusername\",\n  \"full_name\": \"Jane Doe\",\n  \"is_active\": true\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/users/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "users", "1"]
+            },
+            "description": "Update user information. All fields are optional."
+          },
+          "response": []
+        },
+        {
+          "name": "Delete User",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/users/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "users", "1"]
+            },
+            "description": "Delete a user account by user ID. Returns 204 No Content on success."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Chats",
+      "item": [
+        {
+          "name": "Create Chat",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user_id\": 1,\n  \"title\": \"Math Study Session\",\n  \"description\": \"Studying algebra and geometry\",\n  \"agent_type\": \"general\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/chats/",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "chats", ""]
+            },
+            "description": "Create a new chat session for a user. Title defaults to 'New Chat' if not provided."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Chat by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/chats/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "chats", "1"]
+            },
+            "description": "Get chat details including all messages in the chat"
+          },
+          "response": []
+        },
+        {
+          "name": "Get User Chats",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/chats/user/1?skip=0&limit=100",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "chats", "user", "1"],
+              "query": [
+                {
+                  "key": "skip",
+                  "value": "0"
+                },
+                {
+                  "key": "limit",
+                  "value": "100"
+                }
+              ]
+            },
+            "description": "Get all chats for a user with pagination support"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Chat",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Updated Chat Title\",\n  \"description\": \"Updated description\",\n  \"agent_type\": \"specialized\",\n  \"status\": \"active\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/chats/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "chats", "1"]
+            },
+            "description": "Update chat details. All fields are optional."
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Chat",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/chats/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "chats", "1"]
+            },
+            "description": "Delete a chat session by chat ID. Returns 204 No Content on success."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Messages",
+      "item": [
+        {
+          "name": "Create Message",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"chat_id\": 1,\n  \"content\": \"What is the capital of France?\",\n  \"role\": \"user\",\n  \"message_metadata\": {\n    \"source\": \"web\",\n    \"language\": \"en\"\n  }\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/messages/",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "messages", ""]
+            },
+            "description": "Create a new message in a chat. Role must be 'user', 'assistant', or 'system'. Metadata is optional."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Message by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/messages/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "messages", "1"]
+            },
+            "description": "Get a specific message by message ID"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Chat Messages",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/messages/chat/1?skip=0&limit=100",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "messages", "chat", "1"],
+              "query": [
+                {
+                  "key": "skip",
+                  "value": "0"
+                },
+                {
+                  "key": "limit",
+                  "value": "100"
+                }
+              ]
+            },
+            "description": "Get all messages for a specific chat with pagination support"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Message",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"content\": \"Updated message content\",\n  \"message_metadata\": {\n    \"edited\": true,\n    \"edit_reason\": \"typo fix\"\n  }\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/messages/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "messages", "1"]
+            },
+            "description": "Update a message content and/or metadata. All fields are optional."
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Message",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/messages/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "messages", "1"]
+            },
+            "description": "Delete a message by message ID. Returns 204 No Content on success."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Files",
+      "item": [
+        {
+          "name": "Upload File",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "src": ""
+                },
+                {
+                  "key": "user_id",
+                  "value": "1",
+                  "type": "text"
+                },
+                {
+                  "key": "chat_id",
+                  "value": "1",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/files/",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "files", ""]
+            },
+            "description": "Upload a file and extract text. User_id is required. Chat_id is optional. File text will be automatically extracted and processed."
+          },
+          "response": []
+        },
+        {
+          "name": "Get File by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/files/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "files", "1"]
+            },
+            "description": "Get file metadata including extracted text"
+          },
+          "response": []
+        },
+        {
+          "name": "Get User Files",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/files/user/1?skip=0&limit=100",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "files", "user", "1"],
+              "query": [
+                {
+                  "key": "skip",
+                  "value": "0"
+                },
+                {
+                  "key": "limit",
+                  "value": "100"
+                }
+              ]
+            },
+            "description": "Get all files uploaded by a specific user with pagination support"
+          },
+          "response": []
+        },
+        {
+          "name": "Delete File",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/files/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "files", "1"]
+            },
+            "description": "Delete a file and its metadata. Removes both the physical file and database record. Returns 204 No Content on success."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Agents",
+      "item": [
+        {
+          "name": "Summarizer Agent",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user_id\": 1,\n  \"chat_id\": 1,\n  \"input_text\": \"Long text to summarize...\",\n  \"file_id\": null,\n  \"parameters\": {\n    \"summary_length\": \"medium\",\n    \"focus_areas\": [\"key_points\", \"conclusion\"]\n  }\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/agent/summarizer",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "agent", "summarizer"]
+            },
+            "description": "Generate a summary from input text or uploaded file. Either input_text or file_id must be provided. Parameters are optional."
+          },
+          "response": []
+        },
+        {
+          "name": "Question Generator Agent",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user_id\": 1,\n  \"chat_id\": 1,\n  \"input_text\": \"Text to generate questions from...\",\n  \"file_id\": null,\n  \"parameters\": {\n    \"num_questions\": 5,\n    \"difficulty\": \"medium\",\n    \"question_types\": [\"multiple_choice\", \"essay\"]\n  }\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/agent/question_generator",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "agent", "question_generator"]
+            },
+            "description": "Generate quiz questions from input text or uploaded file. Either input_text or file_id must be provided. Parameters control the number, difficulty, and types of questions."
+          },
+          "response": []
+        },
+        {
+          "name": "Explainer Agent",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user_id\": 1,\n  \"chat_id\": 1,\n  \"input_text\": \"Concept or question to explain\",\n  \"file_id\": null,\n  \"parameters\": {\n    \"context_depth\": \"detailed\",\n    \"include_examples\": true\n  }\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/agent/explainer",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "agent", "explainer"]
+            },
+            "description": "Provide context-aware explanations for a question. Input_text is required. User_id is required for RAG context retrieval. Chat_id is optional for storing the exchange."
+          },
+          "response": []
+        },
+        {
+          "name": "Resource Recommender Agent",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user_id\": 1,\n  \"chat_id\": 1,\n  \"input_text\": \"Topic for which to recommend resources\",\n  \"file_id\": null,\n  \"parameters\": {\n    \"resource_types\": [\"articles\", \"videos\", \"books\"],\n    \"max_resources\": 10\n  }\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/agent/resource_recommender",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "agent", "resource_recommender"]
+            },
+            "description": "Recommend learning resources based on a topic or content. Input_text is required. Parameters control resource types and quantity."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Workflows",
+      "item": [
+        {
+          "name": "Run Workflow",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user_id\": 1,\n  \"chat_id\": 1,\n  \"workflow_type\": \"pdf_processing\",\n  \"input_data\": {\n    \"input_text\": \"Full document text here\"\n  }\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/workflow/run",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "workflow", "run"]
+            },
+            "description": "Trigger a multi-agent workflow. Supported types: 'pdf_processing' (Upload PDF → Summarize → Generate Questions → Recommend Resources) and 'multi_agent_chat' (Context retrieval → Agent response → Store embeddings). Returns 202 Accepted status as workflows run in background."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Workflow Status",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/workflow/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "workflow", "1"]
+            },
+            "description": "Get workflow status and results. Status can be 'pending', 'running', 'completed', or 'failed'."
+          },
+          "response": []
+        },
+        {
+          "name": "Get User Workflows",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/workflow/user/1?skip=0&limit=100",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "workflow", "user", "1"],
+              "query": [
+                {
+                  "key": "skip",
+                  "value": "0"
+                },
+                {
+                  "key": "limit",
+                  "value": "100"
+                }
+              ]
+            },
+            "description": "Get all workflows for a user with pagination support"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Memory & Embeddings",
+      "item": [
+        {
+          "name": "Create Embeddings",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user_id\": 1,\n  \"texts\": [\n    \"First text chunk to embed\",\n    \"Second text chunk to embed\",\n    \"Third text chunk to embed\"\n  ],\n  \"file_id\": 1,\n  \"content_type\": \"general\",\n  \"metadata\": {\n    \"source\": \"uploaded_document\",\n    \"chapter\": \"introduction\"\n  }\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/memory/",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "memory", ""]
+            },
+            "description": "Create embeddings and store in Pinecone and PostgreSQL using RAG pipeline. Texts list cannot be empty. Content_type can be 'summary', 'question', 'explanation', 'resource', or 'general'. Metadata and file_id are optional."
+          },
+          "response": []
+        },
+        {
+          "name": "Search Embeddings",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/memory/search?query=search_term&user_id=1&top_k=5&content_type=general",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "memory", "search"],
+              "query": [
+                {
+                  "key": "query",
+                  "value": "search_term"
+                },
+                {
+                  "key": "user_id",
+                  "value": "1"
+                },
+                {
+                  "key": "top_k",
+                  "value": "5"
+                },
+                {
+                  "key": "content_type",
+                  "value": "general"
+                }
+              ]
+            },
+            "description": "Search for similar embeddings based on query. Query cannot be empty. Top_k must be between 1 and 50 (default: 5). Content_type filter is optional."
+          },
+          "response": []
+        },
+        {
+          "name": "Get User Memories",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/memory/user/1?skip=0&limit=100",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "memory", "user", "1"],
+              "query": [
+                {
+                  "key": "skip",
+                  "value": "0"
+                },
+                {
+                  "key": "limit",
+                  "value": "100"
+                }
+              ]
+            },
+            "description": "Get all memory records for a user with pagination support"
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Memory",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/memory/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "memory", "1"]
+            },
+            "description": "Delete memory embedding from both Pinecone and PostgreSQL. Returns 204 No Content on success."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Memory Stats",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/memory/stats",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "memory", "stats"]
+            },
+            "description": "Get statistics about the memory/embeddings index"
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8000",
+      "type": "string"
+    },
+    {
+      "key": "api_prefix",
+      "value": "/api",
+      "type": "string"
+    },
+    {
+      "key": "user_id",
+      "value": "1",
+      "type": "string"
+    },
+    {
+      "key": "chat_id",
+      "value": "1",
+      "type": "string"
+    },
+    {
+      "key": "message_id",
+      "value": "1",
+      "type": "string"
+    },
+    {
+      "key": "file_id",
+      "value": "1",
+      "type": "string"
+    },
+    {
+      "key": "workflow_id",
+      "value": "1",
+      "type": "string"
+    },
+    {
+      "key": "memory_id",
+      "value": "1",
+      "type": "string"
+    }
+  ]
+}
